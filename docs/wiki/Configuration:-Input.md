@@ -356,6 +356,16 @@ input {
 }
 ```
 
+You can optionally set `mode="lazy"`.
+Then, focus-follows-mouse will only switch focus when switching outputs.
+
+```kdl
+input {
+    // Only update focus when hovering a different output.
+    focus-follows-mouse mode="lazy"
+}
+
+
 #### `workspace-auto-back-and-forth`
 
 Normally, switching to the same workspace by index twice will do nothing (since you're already on that workspace).
