@@ -383,6 +383,26 @@ pub struct Touch {
 pub struct FocusFollowsMouse {
     #[knuffel(property, str)]
     pub max_scroll_amount: Option<Percent>,
+    #[knuffel(property, str)]
+    pub mode: Option<FocusFollowsMouseMode>,
+}
+
+#[derive(Debug, PartialEq, Eq, Clone, Copy)]
+pub enum FocusFollowsMouseMode {
+    Lazy,
+}
+
+impl FromStr for FocusFollowsMouseMode {
+    type Err = miette::Error;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s {
+            "lazy" => Ok(Self::Lazy),
+            _ => Err(miette!(
+                r#"invalid mode for focus-follows-mouse, can be "lazy""#
+            )),
+        }
+    }
 }
 
 #[derive(knuffel::Decode, Debug, PartialEq, Eq, Clone, Copy)]
